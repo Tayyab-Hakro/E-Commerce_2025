@@ -1,35 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import { AllWords } from "./Word";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [input, setInput] = useState("");
+  const [meaning, setMeaning] = useState("");
+  
+  const lowerCaseInput = input.toLowerCase();
+
+  const findWords = (e) => {
+    e.preventDefault();
+    
+    if (AllWords[lowerCaseInput]) {
+      setMeaning(AllWords[lowerCaseInput]);
+    } else {
+      setMeaning("Word is not available in my dictionary.");
+    }
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="container">
+      <h1>Made by Tayyab Hakro</h1>
+      <span>This is Custom  made Dictionary so words you can not find most word</span>
+      <span >Try these words Car house tree </span>
+      <h2>Find Words</h2>
+      <input 
+        type="text" 
+        value={input} 
+        onChange={(e) => setInput(e.target.value)} 
+        placeholder="Enter a word..." 
+      />
+      <button onClick={findWords}>Find Meaning</button>
+      <p><strong>{lowerCaseInput}:</strong> {meaning}</p>
+    </div>
+  );
 }
 
-export default App
+export default App;
